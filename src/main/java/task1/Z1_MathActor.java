@@ -2,6 +2,7 @@ package task1;
 
 import akka.actor.AbstractActor;
 import akka.actor.AllForOneStrategy;
+import akka.actor.OneForOneStrategy;
 import akka.actor.Props;
 import akka.actor.SupervisorStrategy;
 import akka.event.Logging;
@@ -44,12 +45,22 @@ public class Z1_MathActor extends AbstractActor {
     }
 
     private static final SupervisorStrategy strategy
-            = new AllForOneStrategy(
+            = new OneForOneStrategy(
             10,
             Duration.create("1 minute"),
-            DeciderBuilder.match(ArithmeticException.class, e -> (SupervisorStrategy.Directive) resume())
+            DeciderBuilder.match(ArithmeticException.class,
+                    e -> (SupervisorStrategy.Directive) resume())
                     .matchAny(o -> (SupervisorStrategy.Directive) restart())
                     .build());
+
+//    private static final SupervisorStrategy strategy
+//            = new AllForOneStrategy(
+//            10,
+//            Duration.create("1 minute"),
+//            DeciderBuilder.match(ArithmeticException.class,
+//                    e -> (SupervisorStrategy.Directive) resume())
+//                    .matchAny(o -> (SupervisorStrategy.Directive) restart())
+//                    .build());
 
     @Override
     public SupervisorStrategy supervisorStrategy() {
