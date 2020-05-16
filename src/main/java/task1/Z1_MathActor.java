@@ -44,23 +44,23 @@ public class Z1_MathActor extends AbstractActor {
         context().actorOf(Props.create(Z1_DivideWorker.class), "divideWorker");
     }
 
-    private static final SupervisorStrategy strategy
-            = new OneForOneStrategy(
-            10,
-            Duration.create("1 minute"),
-            DeciderBuilder.match(ArithmeticException.class,
-                    e -> (SupervisorStrategy.Directive) resume())
-                    .matchAny(o -> (SupervisorStrategy.Directive) restart())
-                    .build());
-
 //    private static final SupervisorStrategy strategy
-//            = new AllForOneStrategy(
+//            = new OneForOneStrategy(
 //            10,
 //            Duration.create("1 minute"),
 //            DeciderBuilder.match(ArithmeticException.class,
 //                    e -> (SupervisorStrategy.Directive) resume())
 //                    .matchAny(o -> (SupervisorStrategy.Directive) restart())
 //                    .build());
+
+    private static final SupervisorStrategy strategy
+            = new AllForOneStrategy(
+            10,
+            Duration.create("1 minute"),
+            DeciderBuilder.match(ArithmeticException.class,
+                    e -> (SupervisorStrategy.Directive) resume())
+                    .matchAny(o -> (SupervisorStrategy.Directive) restart())
+                    .build());
 
     @Override
     public SupervisorStrategy supervisorStrategy() {
