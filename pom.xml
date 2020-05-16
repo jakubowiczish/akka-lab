@@ -57,16 +57,22 @@
 
         <dependency>
             <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-slf4j_2.12</artifactId>
+            <artifactId>akka-slf4j_2.13</artifactId>
             <version>2.6.5</version>
-            <scope>test</scope>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.5</version>
         </dependency>
 
         <dependency>
             <groupId>com.typesafe.akka</groupId>
             <artifactId>akka-protobuf_2.13</artifactId>
             <version>2.6.5</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -82,7 +88,6 @@
             <version>2.6.5</version>
             <scope>compile</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.reactivestreams</groupId>
@@ -126,5 +131,6 @@
             <version>2.6.5</version>
             <scope>compile</scope>
         </dependency>
+
     </dependencies>
 </project>
